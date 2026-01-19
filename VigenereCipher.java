@@ -12,25 +12,25 @@ public class VigenereCipher
 
         int nonLs = 0;
         
-        for (int i = 0; i < plainText.length(); i++)
+        for (int i = 0; i < plainText.length(); i++) //iterate thru input text
         {
             char originalChar = plainText.charAt(i);
             
-            int keyCharInt = (int) Character.toLowerCase(keyword.charAt((i-nonLs)%keyword.length()))-97;
+            int keyCharInt = (int) Character.toLowerCase(keyword.charAt((i-nonLs)%keyword.length()))-97; //set keyword char
             if (!Character.isLetter(originalChar)) nonLs++;
             
             int lower = 0;
-            if (Character.isLowerCase(originalChar)) lower = 32;
+            if (Character.isLowerCase(originalChar)) lower = 32; //determine case
             
-            char newChar = (char) (((originalChar - 65 - lower) + keyCharInt) % 26 + 65 + lower);
+            char newChar = (char) (((originalChar - 65 - lower) + keyCharInt) % 26 + 65 + lower); //offset new char by keyword char
             
-            if (Character.isLetter(originalChar)) outp += newChar;
-            else outp += originalChar;
+            if (Character.isLetter(originalChar)) outp += newChar; //build new string with new chars
+            else outp += originalChar; //keep original char if symbol
         }
         
         return outp;
     }
-    public static String decode(String plainText, String keyword)
+    public static String decode(String plainText, String keyword) //reverse of previous method
     {
         String outp = "";
                     
